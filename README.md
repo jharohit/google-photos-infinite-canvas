@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="header.png" alt="Google Photos Infinite Canvas" width="100%" />
+</p>
+
 # Google Photos Infinite Canvas
 
 An interactive, infinite-canvas explorer and visualizer for Google Photos public shared albums. Built with React, Vite, Tailwind CSS, and a headless extraction backend powered by Express and Puppeteer.
