@@ -14,7 +14,9 @@ An interactive, infinite-canvas explorer and visualizer for Google Photos public
 
 ### Demo
 
-<video src="demo.mp4" controls="true" width="100%"></video>
+<p align="center">
+  <img src="demo.gif" alt="Google Photos Infinite Canvas Demo" width="100%" />
+</p>
 
 ### Key Features
 
