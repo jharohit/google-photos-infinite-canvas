@@ -6,6 +6,8 @@
 
 An interactive, infinite-canvas explorer and visualizer for Google Photos public shared albums. Built with React, Vite, Tailwind CSS, and a headless extraction backend powered by Express and Puppeteer.
 
+🔗 **Live Demo**: [https://choosing-fastest-family-area.trycloudflare.com/](https://choosing-fastest-family-area.trycloudflare.com/)
+
 ---
 
 ## Overview
@@ -13,6 +15,8 @@ An interactive, infinite-canvas explorer and visualizer for Google Photos public
 **Google Photos Infinite Canvas** transforms standard Google Photos shared albums into an endless, spatial masonry canvas. Instead of scrolling linearly down a traditional feed, you can freely pan, pinch, and zoom in all directions to explore your photo collections dynamically.
 
 ### Demo
+
+🔗 **Try it live**: [https://choosing-fastest-family-area.trycloudflare.com/](https://choosing-fastest-family-area.trycloudflare.com/)
 
 <p align="center">
   <img src="demo.gif" alt="Google Photos Infinite Canvas Demo" width="100%" />
