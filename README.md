@@ -12,6 +12,10 @@ An interactive, infinite-canvas explorer and visualizer for Google Photos public
 
 **Google Photos Infinite Canvas** transforms standard Google Photos shared albums into an endless, spatial masonry canvas. Instead of scrolling linearly down a traditional feed, you can freely pan, pinch, and zoom in all directions to explore your photo collections dynamically.
 
+### Demo
+
+<video src="demo.mp4" controls="true" width="100%"></video>
+
 ### Key Features
 
 - **Endless Spatial Canvas**: Continuous pan & zoom across an infinite, procedurally generated masonry grid.

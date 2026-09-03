@@ -284,7 +284,6 @@ export default function App() {
         setProgress(0);
         checkAndLoadGrid();
       }, 1500);
-      setImportUrl('');
 
     } catch (error) {
       console.error(error);
