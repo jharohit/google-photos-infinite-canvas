@@ -37,12 +37,46 @@ app.post('/api/extract-album', async (req, res) => {
     // Go to the Google Photos album
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
 
+    // Allow client-side JS redirects (e.g. photos.app.goo.gl -> photos.google.com) to settle
+    await new Promise(r => setTimeout(r, 1000));
+
+    // Safe execution helpers that recover from context destruction during redirects
+    const safeEvaluate = async (fn, maxRetries = 3) => {
+      for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+          return await page.evaluate(fn);
+        } catch (err) {
+          if (err.message && (err.message.includes('Execution context was destroyed') || err.message.includes('Cannot find context'))) {
+            await new Promise(r => setTimeout(r, 700));
+            continue;
+          }
+          throw err;
+        }
+      }
+      return await page.evaluate(fn);
+    };
+
+    const safeContent = async (maxRetries = 3) => {
+      for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+          return await page.content();
+        } catch (err) {
+          if (err.message && (err.message.includes('Execution context was destroyed') || err.message.includes('Cannot find context'))) {
+            await new Promise(r => setTimeout(r, 700));
+            continue;
+          }
+          throw err;
+        }
+      }
+      return await page.content();
+    };
+
     let uniqueUrls = new Set();
     const regex = /(https:\/\/lh3\.googleusercontent\.com\/(?:pw\/)?[a-zA-Z0-9\-_]{40,})/g;
 
     // Helper to scrape current DOM
     const extractCurrentDOM = async () => {
-      const html = await page.content();
+      const html = await safeContent();
       let match;
       while ((match = regex.exec(html)) !== null) { 
         uniqueUrls.add(match[1]); 
@@ -50,7 +84,7 @@ app.post('/api/extract-album', async (req, res) => {
     };
 
     // Scroll Loop: Google lazy-loads DOM nodes
-    let lastHeight = await page.evaluate('document.body.scrollHeight');
+    let lastHeight = await safeEvaluate(() => document.body.scrollHeight);
     let retries = 0;
     const MAX_SCROLLS = 100;
 
@@ -58,12 +92,12 @@ app.post('/api/extract-album', async (req, res) => {
       await extractCurrentDOM();
       
       // Scroll down
-      await page.evaluate('window.scrollBy(0, 1500)');
+      await safeEvaluate(() => window.scrollBy(0, 1500));
       
       // Wait for lazy loading
       await new Promise(r => setTimeout(r, 500));
       
-      let newHeight = await page.evaluate('document.body.scrollHeight');
+      let newHeight = await safeEvaluate(() => document.body.scrollHeight);
       if (newHeight === lastHeight) {
         retries++;
         if (retries >= 4) break; 
