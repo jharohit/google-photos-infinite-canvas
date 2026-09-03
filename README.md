@@ -16,8 +16,6 @@ An interactive, infinite-canvas explorer and visualizer for Google Photos public
 
 ### Demo
 
-🔗 **Try it live**: [https://choosing-fastest-family-area.trycloudflare.com/](https://choosing-fastest-family-area.trycloudflare.com/)
-
 <p align="center">
   <img src="demo.gif" alt="Google Photos Infinite Canvas Demo" width="100%" />
 </p>
